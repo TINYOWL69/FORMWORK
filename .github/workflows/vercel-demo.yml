@@ -1,0 +1,24 @@
+name: Verify Vercel demo
+on:
+  push:
+    branches: [codex/vercel-demo]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      NEXT_PUBLIC_FORMWORK_DEMO: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci
+      - run: node scripts/prepare-assets.mjs && npx next build --webpack
+      - run: npm run test:geometry
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: repaired-lockfile
+          path: package-lock.json
