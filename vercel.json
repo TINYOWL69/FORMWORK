@@ -1,0 +1,5 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "node scripts/prepare-assets.mjs && next build --webpack",
+  "env": { "NEXT_PUBLIC_FORMWORK_DEMO": "1" }
+}
