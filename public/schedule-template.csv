@@ -1,0 +1,2 @@
+product_name,manufacturer,model_number,strategy,project,material,finish,width_mm,depth_mm,height_mm,thickness_mm,leg_mm,inset_mm,centers_mm,source_url,notes
+Studio table — sample,Formwork sample,T01,table,Sample project,Oak,Natural,1200,600,750,30,40,50,,,Demonstration only; verify all dimensions before modeling.

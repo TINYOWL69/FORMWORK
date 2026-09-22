@@ -1,0 +1,3 @@
+import type {Specification} from '../specification';
+/** One isolated native heap per job. Termination releases all WASM allocations. */
+export function generateInWorker(specs:Specification[]):Promise<{bytes:Uint8Array,report:any}>{return new Promise((resolve,reject)=>{const worker=new Worker('/rhino/model-worker.js');const timeout=setTimeout(()=>{worker.terminate();reject(Error('Geometry generation exceeded 90 seconds. Reduce the schedule size and retry.'));},90000);const finish=()=>{clearTimeout(timeout);worker.terminate();};worker.onmessage=e=>{finish();if(e.data.error)reject(Error(e.data.error));else resolve(e.data);};worker.onerror=()=>{finish();reject(Error('The Rhino engine could not run. Reload the page and retry.'));};worker.postMessage(specs);});}
